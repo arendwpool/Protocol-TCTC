@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="Published_service_TC" targetNamespace="http://www.example.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://www.example.com/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.com/">
+      <xsd:element name="GiveLTLQuotation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="tcid" type="xsd:string" />
+            <xsd:element name="quotation" type="xsd:decimal" />
+            <xsd:element name="id" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="GiveLTLQuotationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestLTLQuotation">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="orderid" type="xsd:string" />
+            <xsd:element name="tcid" type="xsd:string" />
+            <xsd:element name="lattitude" type="xsd:decimal" />
+            <xsd:element name="longitude" type="xsd:decimal" />
+            <xsd:element name="size" type="xsd:long" />
+            <xsd:element name="deadline" type="xsd:dateTime" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="RequestLTLQuotationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AwardLTL">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="orderid" type="xsd:string" />
+            <xsd:element name="tcid" type="xsd:string" />
+            <xsd:element name="isAwarded" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="AwardLTLResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="Result" type="xsd:boolean" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GiveLTLQuotationRequest">
+    <wsdl:part name="parameters" element="tns:GiveLTLQuotation" />
+  </wsdl:message>
+  <wsdl:message name="GiveLTLQuotationResponse">
+    <wsdl:part name="result" element="tns:GiveLTLQuotationResponse" />
+  </wsdl:message>
+  <wsdl:message name="RequestLTLQuotationRequest">
+    <wsdl:part name="parameters" element="tns:RequestLTLQuotation" />
+  </wsdl:message>
+  <wsdl:message name="RequestLTLQuotationResponse">
+    <wsdl:part name="result" element="tns:RequestLTLQuotationResponse" />
+  </wsdl:message>
+  <wsdl:message name="AwardLTLRequest">
+    <wsdl:part name="parameters" element="tns:AwardLTL" />
+  </wsdl:message>
+  <wsdl:message name="AwardLTLResponse">
+    <wsdl:part name="result" element="tns:AwardLTLResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Published_service_TCPortType">
+    <wsdl:operation name="GiveLTLQuotation">
+      <wsdl:documentation></wsdl:documentation>
+      <wsdl:input message="tns:GiveLTLQuotationRequest" />
+      <wsdl:output message="tns:GiveLTLQuotationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestLTLQuotation">
+      <wsdl:documentation></wsdl:documentation>
+      <wsdl:input message="tns:RequestLTLQuotationRequest" />
+      <wsdl:output message="tns:RequestLTLQuotationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="AwardLTL">
+      <wsdl:documentation></wsdl:documentation>
+      <wsdl:input message="tns:AwardLTLRequest" />
+      <wsdl:output message="tns:AwardLTLResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Published_service_TCSoap" type="tns:Published_service_TCPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GiveLTLQuotation">
+      <soap:operation soapAction="http://www.example.com/GiveLTLQuotation" />
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestLTLQuotation">
+      <soap:operation soapAction="http://www.example.com/RequestLTLQuotation" />
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AwardLTL">
+      <soap:operation soapAction="http://www.example.com/AwardLTL" />
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Published_service_TC">
+    <wsdl:port name="Published_service_TCPort" binding="tns:Published_service_TCSoap">
+      <soap:address location="http://localhost:8080/ws/Published_service_TC" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
